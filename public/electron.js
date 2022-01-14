@@ -6,6 +6,7 @@ function createWindow() {
     height: 600,
   });
 
+  win.setMenuBarVisibility(false);
   win.loadURL('http://localhost:3000');
 }
 

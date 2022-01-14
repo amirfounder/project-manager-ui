@@ -1,0 +1,25 @@
+.main {
+  padding: 60px 30px;
+  color: white;
+  background-color: rgb(24, 24, 24);
+  height: calc(100vh - calc(2 * 60px));
+  display: grid;
+  justify-content: space-around;
+  grid-template-rows: 1fr 4fr 1fr;
+
+  & > .container {
+    display: grid;
+    
+    &:nth-child(1) {
+      align-items: start;
+    }
+
+    &:nth-child(2) {
+      align-items: start;
+    }
+
+    &:nth-child(3) {
+      align-items: end;
+    }
+  }
+}

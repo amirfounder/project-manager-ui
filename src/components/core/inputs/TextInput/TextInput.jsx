@@ -9,11 +9,11 @@ export const TextInput = (props) => {
     value,
     size,
     error,
+    onBlur,
     onKeyDown
   } = props;
 
   const validSizes = ['small', 'medium', 'large'];
-
   const finalInputSizeClassName = validSizes.includes(size)
     ? `input--size-${size}`
     : `input--size-medium`
@@ -36,6 +36,7 @@ export const TextInput = (props) => {
         value={value}
         onChange={onChange}
         onKeyDown={onKeyDown}
+        onBlur={onBlur}
       />
       <p className={styles.error}>{error}</p>
     </label>

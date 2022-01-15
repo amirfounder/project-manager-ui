@@ -7,8 +7,14 @@ import styles from './NewProject.module.scss'
 
 export const NewProject = () => {
 
-  const [values, setValues] = useState({});
-  const [errors, setErrors] = useState({});
+  const initialValueObj = {
+    name: '',
+    tag: '',
+    description: ''
+  }
+
+  const [values, setValues] = useState(initialValueObj);
+  const [errors, setErrors] = useState(initialValueObj);
 
   return (
     <View>

@@ -1,0 +1,43 @@
+.label {
+  width: 100%;
+  line-height: 1.4em;
+}
+
+.select {
+  width: 100%;
+  border: 1px solid #bbb;
+
+  &:focus {
+    border: 1px solid #bbb;
+    outline: none;
+  }
+}
+
+.error {
+  color: red;
+  font-size: 14px;
+  line-height: 1.4em;
+  margin-block-start: .8em;
+  margin-block-end: .8em;
+}
+
+.select--size-large {
+  padding: 10px;
+  // width: calc(100% - 22px);
+  width: calc(100%);
+  font-size: 20px;
+}
+
+.select--size-medium {
+  padding: 8px;
+  // width: calc(100% - 18px);
+  width: calc(100%);
+  font-size: 17px;
+}
+
+.select--size-small {
+  padding: 5px;
+  // width: calc(100% - 12px);
+  width: calc(100%);
+  font-size: 15px;
+}

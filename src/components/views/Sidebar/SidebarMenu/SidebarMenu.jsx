@@ -7,7 +7,7 @@ export const SidebarMenu = () => {
     <div className={styles.main}>
       <SidebarMenuItem to="/">Home</SidebarMenuItem>
       <SidebarMenuItem to="/projects">Projects</SidebarMenuItem>
-      <SidebarMenuItem to="/projects">Account</SidebarMenuItem>
+      <SidebarMenuItem to="/projects/new">New</SidebarMenuItem>
     </div>
   )
 }

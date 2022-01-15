@@ -5,6 +5,7 @@ export const Button = (props) => {
   const {
     children,
     dataTestId,
+    label,
     size,
     type,
     ...other
@@ -23,7 +24,7 @@ export const Button = (props) => {
       `}
       {...other}
     >
-      {children}
+      {label || children}
     </button>
   )
 }

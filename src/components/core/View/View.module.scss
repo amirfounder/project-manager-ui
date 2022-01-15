@@ -1,3 +1,5 @@
 .main {
   padding: 60px;
+  height: calc(100vh - calc(2 * 60px));
+  overflow-y: auto;
 }

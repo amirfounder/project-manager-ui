@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from 'react';
-import styles from './Projects.module.scss';
+import { Heading } from '../../core';
+import { View } from '../../core/View/View';
+import { ProjectsGrid } from './ProjectsGrid';
 import { getAllProjects } from './ProjectsService'
 
 export const Projects = () => {
@@ -12,14 +14,12 @@ export const Projects = () => {
   }, [])
 
   return (
-    <div>
-      {apiError !== '' && <div>{apiError}</div>}
-      {projects.map((project) => (
-        <>
-          <div>{project.id}</div>
-          <div>{project.name}</div>
-        </>
-      ))}
-    </div>
+    <View>
+      <Heading level='1'>Projects</Heading>
+      {apiError && <p>{apiError}</p>}
+      <ProjectsGrid
+        projects={projects}
+      />
+    </View>
   )
 }

@@ -1,3 +1,4 @@
+import constants from "../../../utils/constants"
 import httpService from "../../../utils/httpService"
 import { validateRequired } from "../../../utils/validation"
 
@@ -19,10 +20,11 @@ export const postProject = (project, setApiError, navigate) => {
       if (response.ok) {
         navigate('/projects')
       } else {
-        throw new Error(response.errorMessage || 'Oops! There was a problem.')
+        throw new Error(constants.DEFAULT_ERROR_MESSAGE)
       }
     })
     .catch((error) => {
-      setApiError(error)
+      const message = String(error);
+      setApiError(message)
     });
 }

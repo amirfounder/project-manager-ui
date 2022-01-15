@@ -1,2 +1,5 @@
 export * from './Button'
 export * from './Heading'
+export * from './inputs'
+export * from './Line'
+export * from './View'

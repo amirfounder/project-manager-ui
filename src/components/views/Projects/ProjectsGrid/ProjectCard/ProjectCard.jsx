@@ -1,5 +1,6 @@
 import React from 'react';
-import { Heading, Line } from '../../../../core';
+import { Link } from 'react-router-dom';
+import { Heading, Line, Paragraph } from '../../../../core';
 import styles from './ProjectCard.module.scss'
 
 export const ProjectCard = (props) => {
@@ -10,9 +11,9 @@ export const ProjectCard = (props) => {
   return (
     <div className={styles.main}>
       <Heading level='3'>{project.name}</Heading>
-      <div>{project.tag}</div>
+      <Paragraph>{project.description}</Paragraph>
       <Line />
-      <div>{project.description}</div>
+      <Link className={styles.link} to={`/project/${project.id}`}>View Project</Link>
     </div>
   )
 }

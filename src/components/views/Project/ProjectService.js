@@ -1,5 +1,7 @@
+import httpService from "../../../utils/httpService"
+
 export const getProjectById = (id, setProject, setApiError) => {
-  await httpService('GET', '/projects/' = id)
+  httpService('GET', '/projects/' + id)
     .then((response) => {
       if (response.ok) {
         return response.json()
@@ -14,7 +16,7 @@ export const getProjectById = (id, setProject, setApiError) => {
 }
 
 export const getColumnsByProjectId = (id, setColumns, setApiError) => {
-  await httpService('GET', '/columns?project_id=' = id)
+  httpService('GET', '/columns?project_id=' + id)
     .then((response) => {
       if (response.ok) {
         return response.json()
@@ -29,7 +31,7 @@ export const getColumnsByProjectId = (id, setColumns, setApiError) => {
 }
 
 export const getCardsByProjectId = (id, setCards, setApiError) => {
-  await httpService('GET', '/cards?project_id=' = id)
+  httpService('GET', '/cards?project_id=' + id)
     .then((response) => {
       if (response.ok) {
         return response.json()

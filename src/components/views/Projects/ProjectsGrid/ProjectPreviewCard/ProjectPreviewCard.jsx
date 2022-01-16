@@ -13,7 +13,7 @@ export const ProjectPreviewCard = (props) => {
       <Heading level='3'>{project.name}</Heading>
       <Line />
       <Paragraph>{project.description}</Paragraph>
-      <Link className={styles.link} to={`/project/${project.id}`}>View Project</Link>
+      <Link className={styles.link} to={`/projects/${project.id}`}>View Project</Link>
     </div>
   )
 }

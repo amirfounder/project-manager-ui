@@ -8,6 +8,38 @@ import {
   getColumnsByProjectId,
   getCardsByProjectId
 } from './ProjectService';
+import { isArray } from '../../../utils/utils';
+import { ScrumColumn } from './ScrumColumn';
+import { ScrumCard } from './ScrumCard';
+
+const data = {
+  columns: [
+    {
+      id: 1,
+      order: 0,
+      name: 'Backlog',
+    },
+    {
+      id: 2,
+      order: 1,
+      name: 'In Progress'
+    },
+    {
+      id: 3,
+      order: 2,
+      name: 'Done'
+    }
+  ],
+  cards: [
+    {
+      id: 1,
+      columnId: 1,
+      order: 0,
+      name: 'Card 1',
+      description: 'Lorem ipsum...'
+    }
+  ]
+}
 
 export const Project = () => {
   
@@ -15,15 +47,15 @@ export const Project = () => {
 
   console.log('rendered')
 
-  const [project, setProject] = useState([]);
-  const [columns, setColumns] = useState([])
-  const [cards, setCards] = useState([])
+  const [project, setProject] = useState({});
+  const [columns, setColumns] = useState(data.columns)
+  const [cards, setCards] = useState(data.cards)
   const [apiError, setApiError] = useState('');
 
   useEffect(() => {
     getProjectById(id, setProject, setApiError);
-    getColumnsByProjectId(id, setColumns, setApiError);
-    getCardsByProjectId(id, setCards, setApiError);
+  //   getColumnsByProjectId(id, setColumns, setApiError);
+  //   getCardsByProjectId(id, setCards, setApiError);
   }, [])
 
   return (
@@ -31,6 +63,25 @@ export const Project = () => {
       <div className={styles.header}>
         <Heading>Project: {project?.name}</Heading>
         <Paragraph>{project?.description}</Paragraph>
+      </div>
+      <div
+        className={styles.columnContainer}
+        style={{
+          display: 'grid',
+          columnGap: '1rem',
+          gridTemplateColumns: '1fr 1fr 1fr'
+        }}
+      >
+        {isArray(columns) && columns.map((column) => {
+          const columnId = column.id;
+          const columnCards = cards.filter((card) => card.columnId === columnId)
+          return (
+            <ScrumColumn
+              cards={columnCards}
+              column={column}
+            />
+          )}
+        )}
       </div>
     </View>
   )

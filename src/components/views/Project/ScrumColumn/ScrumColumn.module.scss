@@ -3,3 +3,25 @@
   border-radius: 5px;
   padding: 20px;
 }
+
+.header {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  align-items: center;
+
+  & > .icon {
+    justify-self: end;
+    font-size: 25px;
+    color: #bbb;
+
+    &:hover {
+      cursor: pointer;
+      color: black;
+      transition-duration: .3s;
+    }
+
+    &:not(:hover) {
+      transition-duration: .3s;
+    }
+  }
+}

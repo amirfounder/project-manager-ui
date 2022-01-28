@@ -69,7 +69,7 @@ export const Project = () => {
         style={{
           display: 'grid',
           columnGap: '1rem',
-          gridTemplateColumns: '1fr 1fr 1fr'
+          gridTemplateColumns: `repeat(${columns.length}, 1fr)`
         }}
       >
         {isArray(columns) && columns.map((column) => {

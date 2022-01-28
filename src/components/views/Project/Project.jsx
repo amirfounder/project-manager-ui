@@ -36,7 +36,8 @@ const data = {
       columnId: 1,
       order: 0,
       name: 'Card 1',
-      description: 'Lorem ipsum...'
+      description: 'Lorem ipsum...',
+      isInEditMode: false
     }
   ]
 }

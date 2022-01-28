@@ -10,15 +10,10 @@ export const ScrumColumn = (props) => {
   const {
     column,
     cards,
-    children
+    setShowModal
   } = props;
 
-  const [isCreatingCard, setIsCreatingCard] = useState(false);
-
-  const handlePlusIconClick = () => {
-    setIsCreatingCard(true);
-  }
-  
+  const handlePlusIconClick = () => { setShowModal(true); }
 
   return (
     <div className={styles.main}>
@@ -40,13 +35,6 @@ export const ScrumColumn = (props) => {
             card={card}
           />
         ))}
-        {isCreatingCard && (
-          <ScrumCard
-            card={{
-              isInEditMode: true
-            }}
-          />
-        )}
       </div>
     </div>
   )

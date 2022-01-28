@@ -10,7 +10,9 @@ import {
 } from './ProjectService';
 import { isArray } from '../../../utils/utils';
 import { ScrumColumn } from './ScrumColumn';
-import { ScrumCard } from './ScrumCard';
+import { Modal } from '../../core/Modal';
+import { CreateCardModalBody } from './modals/CreateCardModalBody/CreateCardModalBody';
+import { ProjectProvider, useProjectContext } from '../../context/ProjectProvider';
 
 const data = {
   columns: [
@@ -43,21 +45,30 @@ const data = {
 }
 
 export const Project = () => {
-  
+
   const { id } = useParams();
 
-  console.log('rendered')
+  const {
+    isCreatingCard, setIsCreatingCard,
+    isUpdatingCard, setIsUpdatingCard,
+    updatedCardValues
+  } = useProjectContext();
 
   const [project, setProject] = useState({});
   const [columns, setColumns] = useState(data.columns)
   const [cards, setCards] = useState(data.cards)
   const [apiError, setApiError] = useState('');
+  const [isCardModalOpen, setIsCardModalOpen] = useState(false)
 
   useEffect(() => {
     getProjectById(id, setProject, setApiError);
-  //   getColumnsByProjectId(id, setColumns, setApiError);
-  //   getCardsByProjectId(id, setCards, setApiError);
+    // getColumnsByProjectId(id, setColumns, setApiError);
+    // getCardsByProjectId(id, setCards, setApiError);
   }, [])
+
+  const style = {
+    gridTemplateColumns: `repeat(${columns.length}, 1fr)`
+  }
 
   return (
     <View>
@@ -67,23 +78,33 @@ export const Project = () => {
       </div>
       <div
         className={styles.columnContainer}
-        style={{
-          display: 'grid',
-          columnGap: '1rem',
-          gridTemplateColumns: `repeat(${columns.length}, 1fr)`
-        }}
+        style={style}
       >
         {isArray(columns) && columns.map((column) => {
           const columnId = column.id;
           const columnCards = cards.filter((card) => card.columnId === columnId)
           return (
             <ScrumColumn
+              setShowModal={setIsCardModalOpen}
               cards={columnCards}
               column={column}
             />
-          )}
+          )
+        }
         )}
       </div>
+      {isCreatingCard && (
+        <CreateCardModal
+          show={isCreatingCard}
+          setShow={setIsCreatingCard}
+        />
+      )}
+      {isUpdatingCard && (
+        <UpdateCardModal
+          show={isUpdatingCard}
+          setShow={setIsUpdatingCard}
+        />
+      )}
     </View>
   )
 }

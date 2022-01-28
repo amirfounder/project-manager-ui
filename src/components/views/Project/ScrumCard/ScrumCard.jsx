@@ -1,22 +1,18 @@
 import React from 'react'
-import { useState } from 'react/cjs/react.development';
-import { Heading, TextInput } from '../../../core';
-import { EdittableScrumCard } from '../EdittableScrumCard';
-import { NonEdittableScrumCard } from '../NonEdittableScrumCard';
+import { Heading } from '../../../core';
 import styles from './ScrumCard.module.scss'
 
 export const ScrumCard = (props) => {
   const {
-    card: {
-      isInEditMode
-    }
+    card,
   } = props;
+
   return (
     <div className={styles.main}>
-      {isInEditMode
-        ? <EdittableScrumCard {...props} />
-        : <NonEdittableScrumCard {...props} />
-      }
+      <Heading level='4'>
+        {card?.name}
+      </Heading>
+      <div>{card?.description}</div>
     </div>
   )
 }

@@ -10,64 +10,41 @@ import {
 } from './ProjectService';
 import { isArray } from '../../../utils/utils';
 import { ScrumColumn } from './ScrumColumn';
-import { Modal } from '../../core/Modal';
-import { CreateCardModalBody } from './modals/CreateCardModalBody/CreateCardModalBody';
-import { ProjectProvider, useProjectContext } from '../../context/ProjectProvider';
-
-const data = {
-  columns: [
-    {
-      id: 1,
-      order: 0,
-      name: 'Backlog',
-    },
-    {
-      id: 2,
-      order: 1,
-      name: 'In Progress'
-    },
-    {
-      id: 3,
-      order: 2,
-      name: 'Done'
-    }
-  ],
-  cards: [
-    {
-      id: 1,
-      columnId: 1,
-      order: 0,
-      name: 'Card 1',
-      description: 'Lorem ipsum...',
-      isInEditMode: false
-    }
-  ]
-}
+import { useProjectContext } from '../../context/ProjectProvider';
+import { CreateCardModal } from './CreateCardModal';
 
 export const Project = () => {
 
-  const { id } = useParams();
+  const { id: projectId } = useParams();
 
   const {
     isCreatingCard, setIsCreatingCard,
     isUpdatingCard, setIsUpdatingCard,
+    cards, setCards,
+    columns, setColumns,
+    createdCardValues, setCreatedCardValues,
     updatedCardValues
   } = useProjectContext();
 
   const [project, setProject] = useState({});
-  const [columns, setColumns] = useState(data.columns)
-  const [cards, setCards] = useState(data.cards)
   const [apiError, setApiError] = useState('');
-  const [isCardModalOpen, setIsCardModalOpen] = useState(false)
 
   useEffect(() => {
-    getProjectById(id, setProject, setApiError);
+    getProjectById(projectId, setProject, setApiError);
     // getColumnsByProjectId(id, setColumns, setApiError);
     // getCardsByProjectId(id, setCards, setApiError);
   }, [])
 
+  useEffect(() => {
+    const projectIdAsNum = Number(projectId)
+    setCreatedCardValues((prevState) => ({
+      ...prevState,
+      projectId: projectIdAsNum
+    }))
+  }, [projectId])
+
   const style = {
-    gridTemplateColumns: `repeat(${columns.length}, 1fr)`
+    gridTemplateColumns: `repeat(${columns?.length}, 1fr)`
   }
 
   return (
@@ -85,7 +62,7 @@ export const Project = () => {
           const columnCards = cards.filter((card) => card.columnId === columnId)
           return (
             <ScrumColumn
-              setShowModal={setIsCardModalOpen}
+              key={column.id}
               cards={columnCards}
               column={column}
             />
@@ -93,12 +70,7 @@ export const Project = () => {
         }
         )}
       </div>
-      {isCreatingCard && (
-        <CreateCardModal
-          show={isCreatingCard}
-          setShow={setIsCreatingCard}
-        />
-      )}
+      {isCreatingCard && <CreateCardModal />}
       {isUpdatingCard && (
         <UpdateCardModal
           show={isUpdatingCard}

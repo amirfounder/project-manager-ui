@@ -1,19 +1,32 @@
 import React from 'react'
-import { useState } from 'react/cjs/react.development';
 import { isArray } from '../../../../utils/utils';
+import { useProjectContext } from '../../../context/ProjectProvider';
 import { Heading, Line, PlusIcon } from '../../../core';
 import { ScrumCard } from '../ScrumCard';
 import styles from './ScrumColumn.module.scss'
-import { createCard } from './ScrumColumnService';
 
 export const ScrumColumn = (props) => {
   const {
     column,
     cards,
-    setShowModal
   } = props;
 
-  const handlePlusIconClick = () => { setShowModal(true); }
+  const {
+    setIsCreatingCard,
+    isUpdatingCard,
+    setCreatedCardValues
+  } = useProjectContext()
+
+  const handleCreateCardClick = () => {
+    if (!isUpdatingCard) {
+      setIsCreatingCard(true);
+      setCreatedCardValues((prevState) => ({
+        ...prevState,
+        columnId: column.id,
+        order: 0
+      }));
+    }
+  }
 
   return (
     <div className={styles.main}>
@@ -21,7 +34,7 @@ export const ScrumColumn = (props) => {
         <Heading ignoreMargin level='3'>{column?.name}</Heading>
         <PlusIcon
           className={styles.icon}
-          onClick={handlePlusIconClick}
+          onClick={handleCreateCardClick}
         />
       </div>
       <Line />
@@ -32,6 +45,7 @@ export const ScrumColumn = (props) => {
       }}>
         {isArray(cards) && cards.map((card) => (
           <ScrumCard
+            key={card.id}
             card={card}
           />
         ))}

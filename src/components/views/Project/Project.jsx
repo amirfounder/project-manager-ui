@@ -31,8 +31,8 @@ export const Project = () => {
 
   useEffect(() => {
     getProjectById(projectId, setProject, setApiError);
-    // getColumnsByProjectId(id, setColumns, setApiError);
-    // getCardsByProjectId(id, setCards, setApiError);
+    getColumnsByProjectId(projectId, setColumns, setApiError);
+    getCardsByProjectId(projectId, setCards, setApiError);
   }, [])
 
   useEffect(() => {

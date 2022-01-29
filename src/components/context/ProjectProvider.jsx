@@ -41,8 +41,8 @@ export const ProjectProvider = (props) => {
   const [isCreatingCard, setIsCreatingCard] = useState(false);
   const [createdCardValues, setCreatedCardValues] = useState({});
 
-  const [cards, setCards] = useState(data.cards);
-  const [columns, setColumns] = useState(data.columns);
+  const [cards, setCards] = useState([]);
+  const [columns, setColumns] = useState([]);
 
   const [updatedCardValues, setUpdatedCardValues] = useState({})
 
